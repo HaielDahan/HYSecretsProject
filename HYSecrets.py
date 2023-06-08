@@ -68,7 +68,9 @@ def Encryption():
 
             # add original image to testFolder
             new_string = image_path.rsplit("\\", 1)[0]
+            print(new_string)
             image_name = image_path.split('\\')[-1]
+            print(image_path)
             new_path = new_string + "\\testFolder\\" + image_name
             im.save(new_path)
 
