@@ -1,0 +1,5 @@
+[theme]
+base="light"
+primaryColor="#4b84ff"
+font="serif"
+STREAMLIT_SERVER_ENABLE_STATIC_SERVING=true
