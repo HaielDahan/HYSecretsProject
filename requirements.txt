@@ -1,0 +1,5 @@
+﻿Pillow
+pycaret
+streamlit==1.13.0
+streamlit_option_menu==0.3.2
+altair==4.0
