@@ -17,15 +17,25 @@ def set_sec_meta(path,seed):
     print(type(seed_aes_val))
     metadata.add_text("Number" , seed_aes_val)
 
-    new_string = path.rsplit("\\", 1)[0]
-    print("new:", new_string)
-    image_name = path.split('\\')
-    print("im name 1 :", image_name)
-    image_name = image_name[-1].split('.')[0]
-    print("im name 2 :", image_name)
-    new_path = new_string + "\\testFolder\\"+image_name[:-5]+"_HYS.png"
+    try:
+        new_string = path.rsplit("\\", 1)[0]
+        print("new:", new_string)
+        image_name = path.split('\\')
+        print("im name 1 :", image_name)
+        image_name = image_name[-1].split('.')[0]
+        print("im name 2 :", image_name)
+        new_path = new_string + "\\testFolder\\"+image_name[:-5]+"_HYS.png"
+        targetImage.save(new_path, pnginfo=metadata)
+    except:
+        new_string = path.rsplit("/", 1)[0]
+        print("new:", new_string)
+        image_name = path.split('/')
+        print("im name 1 :", image_name)
+        image_name = image_name[-1].split('.')[0]
+        print("im name 2 :", image_name)
+        new_path = new_string + "/testFolder/" + image_name[:-5] + "_HYS.png"
+        targetImage.save(new_path, pnginfo=metadata)
 
-    targetImage.save(new_path, pnginfo=metadata)
     im = Image.open(new_path)
     return im
 

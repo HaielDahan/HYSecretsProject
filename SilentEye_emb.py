@@ -101,19 +101,36 @@ def SilentEye_embedding(im, my_str, jump):
 def main(path,my_str, jump):
 
     im = Image.open(path)
-    new_string = path.rsplit("\\", 1)[0]
-    print("new:", new_string)
-    image_name = path.split('\\')
-    print("im name 1 :", image_name)
-    image_name = image_name[-1].split('.')[0]
-    print("im name 2 :", image_name)
-    new_path = new_string + "\\testFolder\\" + image_name + "_SE.png"
 
-    #new_image_path = image_path.rsplit('.', 1)[0]+"\\testFolder\\"+ '_SE.png'
-    # jump = int(input("Enter your jump rate:"))
-    # my_str = fr.file_read("text.txt")
-    SilentEye_embedding(im, my_str, jump).save(new_path)
-    # print("done!\nFile Location: "+new_image_path)
+    try:
+        new_string = path.rsplit("\\", 1)[0]
+        print("new:", new_string)
+        image_name = path.split('\\')
+        print("im name 1 :", image_name)
+        image_name = image_name[-1].split('.')[0]
+        print("im name 2 :", image_name)
+        new_path = new_string + "\\testFolder\\" + image_name + "_SE.png"
+
+        #new_image_path = image_path.rsplit('.', 1)[0]+"\\testFolder\\"+ '_SE.png'
+        # jump = int(input("Enter your jump rate:"))
+        # my_str = fr.file_read("text.txt")
+        SilentEye_embedding(im, my_str, jump).save(new_path)
+        # print("done!\nFile Location: "+new_image_path)
+    except:
+        new_string = path.rsplit("/", 1)[0]
+        print("new:", new_string)
+        image_name = path.split('/')
+        print("im name 1 :", image_name)
+        image_name = image_name[-1].split('.')[0]
+        print("im name 2 :", image_name)
+        new_path = new_string + "/testFolder/" + image_name + "_SE.png"
+
+        # new_image_path = image_path.rsplit('.', 1)[0]+"\\testFolder\\"+ '_SE.png'
+        # jump = int(input("Enter your jump rate:"))
+        # my_str = fr.file_read("text.txt")
+        SilentEye_embedding(im, my_str, jump).save(new_path)
+        # print("done!\nFile Location: "+new_image_path)
+
 
 
 # main(sys.argv[1])

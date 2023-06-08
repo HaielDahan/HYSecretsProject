@@ -66,13 +66,29 @@ def Encryption():
             # starting encryption
             im = Image.open(image_path)
 
-            # add original image to testFolder
-            new_string = image_path.rsplit("\\", 1)[0]
-            print(new_string)
-            image_name = image_path.split('\\')[-1]
-            print(image_path)
-            new_path = new_string + "\\testFolder\\" + image_name
-            im.save(new_path)
+            try:
+                # add original image to testFolder
+                new_string = image_path.rsplit("\\", 1)[0]
+                print(new_string)
+                image_name = image_path.split('\\')[-1]
+                print(image_path)
+                new_path = new_string + "\\testFolder\\" + image_name
+                print(new_path)
+                im.save(new_path)
+
+            except:
+
+                # add original image to testFolder
+                new_string = image_path.rsplit("/", 1)[0]
+                print(new_string)
+                image_name = image_path.split('/')[-1]
+                print(image_path)
+                new_path = new_string + "/testFolder/" + image_name
+                print(new_path)
+                im.save(new_path)
+
+
+
 
             # Do something with the message
 
