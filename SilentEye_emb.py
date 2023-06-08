@@ -104,11 +104,11 @@ def main(path,my_str, jump):
 
     try:
         new_string = path.rsplit("\\", 1)[0]
-        print("new:", new_string)
+        #print("new:", new_string)
         image_name = path.split('\\')
-        print("im name 1 :", image_name)
+        #print("im name 1 :", image_name)
         image_name = image_name[-1].split('.')[0]
-        print("im name 2 :", image_name)
+        #print("im name 2 :", image_name)
         new_path = new_string + "\\testFolder\\" + image_name + "_SE.png"
 
         #new_image_path = image_path.rsplit('.', 1)[0]+"\\testFolder\\"+ '_SE.png'
@@ -118,11 +118,11 @@ def main(path,my_str, jump):
         # print("done!\nFile Location: "+new_image_path)
     except:
         new_string = path.rsplit("/", 1)[0]
-        print("new:", new_string)
+        #print("new:", new_string)
         image_name = path.split('/')
-        print("im name 1 :", image_name)
+        #print("im name 1 :", image_name)
         image_name = image_name[-1].split('.')[0]
-        print("im name 2 :", image_name)
+        #print("im name 2 :", image_name)
         new_path = new_string + "/testFolder/" + image_name + "_SE.png"
 
         # new_image_path = image_path.rsplit('.', 1)[0]+"\\testFolder\\"+ '_SE.png'

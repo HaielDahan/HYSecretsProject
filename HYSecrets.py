@@ -69,22 +69,22 @@ def Encryption():
             try:
                 # add original image to testFolder
                 new_string = image_path.rsplit("\\", 1)[0]
-                print(new_string)
+                #print(new_string)
                 image_name = image_path.split('\\')[-1]
-                print(image_path)
+                #print(image_path)
                 new_path = new_string + "\\testFolder\\" + image_name
-                print(new_path)
+                #print(new_path)
                 im.save(new_path)
 
             except:
 
                 # add original image to testFolder
                 new_string = image_path.rsplit("/", 1)[0]
-                print(new_string)
+                #print(new_string)
                 image_name = image_path.split('/')[-1]
-                print(image_path)
+                #print(image_path)
                 new_path = new_string + "/testFolder/" + image_name
-                print(new_path)
+                #print(new_path)
                 im.save(new_path)
 
 
@@ -224,7 +224,7 @@ def SEdata():
 def Sidebar():
     st.sidebar.title("HYSecrets option:")
     with st.sidebar:
-        st.image("banner-image-2.png", width=200)
+        st.image("Backround/banner-image-2.png", width=200)
         choose = option_menu(menu_title="Option :",
                                      options=['Home', 'Encryption', 'Decryption', 'StegExpose data','About'],
                                      icons=['house-door','lock','unlock','bar-chart-line' ,'info-square'], default_index=0)

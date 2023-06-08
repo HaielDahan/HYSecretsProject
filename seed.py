@@ -13,26 +13,26 @@ def set_sec_meta(path,seed):
     metadata = PngInfo()
 
     seed_aes_val = aes_seed.aes_encrypt(str(seed))
-    print(seed_aes_val)
-    print(type(seed_aes_val))
+    # print(seed_aes_val)
+    # print(type(seed_aes_val))
     metadata.add_text("Number" , seed_aes_val)
 
     try:
         new_string = path.rsplit("\\", 1)[0]
-        print("new:", new_string)
+        # print("new:", new_string)
         image_name = path.split('\\')
-        print("im name 1 :", image_name)
+        # print("im name 1 :", image_name)
         image_name = image_name[-1].split('.')[0]
-        print("im name 2 :", image_name)
+        # print("im name 2 :", image_name)
         new_path = new_string + "\\testFolder\\"+image_name[:-5]+"_HYS.png"
         targetImage.save(new_path, pnginfo=metadata)
     except:
         new_string = path.rsplit("/", 1)[0]
-        print("new:", new_string)
+        # print("new:", new_string)
         image_name = path.split('/')
-        print("im name 1 :", image_name)
+        # print("im name 1 :", image_name)
         image_name = image_name[-1].split('.')[0]
-        print("im name 2 :", image_name)
+        # print("im name 2 :", image_name)
         new_path = new_string + "/testFolder/" + image_name[:-5] + "_HYS.png"
         targetImage.save(new_path, pnginfo=metadata)
 

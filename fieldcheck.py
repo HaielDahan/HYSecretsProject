@@ -11,18 +11,18 @@ def jarWrapper(arr_steg):
         print("StegExpose - Error!")
 
 
-arr_steg = ['StegExpose.jar', 'testFolder', 'default', '0.2', 'check.csv']  # Any number of args to be passed to the jar file
-jarWrapper(arr_steg)
-
-
-# Set the directory path
-directory = "/home/kali/PycharmProjects/checkCombain/testFolder/"
-
-# Loop over all files in the directory
-for filename in os.listdir(directory):
-    # Check if the file is an image (PNG or JPEG)
-    if filename.endswith(".png"):
-        # Print the file name
-
-        targetImage = Image.open(directory+filename)
-        print(targetImage.text)
+# arr_steg = ['StegExpose.jar', 'testFolder', 'default', '0.2', 'check.csv']  # Any number of args to be passed to the jar file
+# jarWrapper(arr_steg)
+#
+#
+# # Set the directory path
+# directory = "/home/kali/PycharmProjects/checkCombain/testFolder/"
+#
+# # Loop over all files in the directory
+# for filename in os.listdir(directory):
+#     # Check if the file is an image (PNG or JPEG)
+#     if filename.endswith(".png"):
+#         # Print the file name
+#
+#         targetImage = Image.open(directory+filename)
+#         print(targetImage.text)

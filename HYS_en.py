@@ -32,11 +32,11 @@ def HYS_encoding(image_path, message):
         i +=1
 
     count = list.count(1)
-    print("count = " + str(count))
+    #print("count = " + str(count))
     number_of_chars = (count * 3 // 8) - 3
     # print(number_of_chars)
 
-    print("Text len you can hide: " + str(number_of_chars))
+    #print("Text len you can hide: " + str(number_of_chars))
     new_image_path = image_path
     im = Image.open(new_image_path)
     my_matrix_image = im.getdata()
