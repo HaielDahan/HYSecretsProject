@@ -66,22 +66,22 @@ def main(path, my_str):
 
     try:
         new_string = path.rsplit("\\", 1)[0]
-        print("new:", new_string)
+        #print("new:", new_string)
         image_name = path.split('\\')
-        print("im name 1 :", image_name)
+        #print("im name 1 :", image_name)
         image_name = image_name[-1].split('.')[0]
-        print("im name 2 :", image_name)
+        #print("im name 2 :", image_name)
         new_path = new_string + "\\testFolder\\" + image_name + "_LSBE.png"
         # my_str = fr.file_read("text.txt")
         lsb_embedding(im, my_str).save(new_path)
         # print("done!\nFile Location: "+new_image_path)
     except:
         new_string = path.rsplit("/", 1)[0]
-        print("new:", new_string)
+        #print("new:", new_string)
         image_name = path.split('/')
-        print("im name 1 :", image_name)
+        #print("im name 1 :", image_name)
         image_name = image_name[-1].split('.')[0]
-        print("im name 2 :", image_name)
+        #print("im name 2 :", image_name)
         new_path = new_string + "/testFolder/" + image_name + "_LSBE.png"
         # my_str = fr.file_read("text.txt")
         lsb_embedding(im, my_str).save(new_path)
