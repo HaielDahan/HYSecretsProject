@@ -15,39 +15,90 @@ import LSB_emb
 import SilentEye_emb
 import altair as alt
 
+import base64
+
 import file_reader as fr
 def Home():
-    st.write("<h1 style='position:absolute; top:20%; left:60%; transform:translate(-50%, -50%);'>Welcome""</h1>",
+    st.write("<h1 style='position:absolute; top:90%; left:30%; transform:translate(-50%, -50%);'>Welcome""</h1>",
              unsafe_allow_html=True)
-    st.write("<h1 style='position:absolute; top:60%; left:60%; transform:translate(-50%, -50%);'>HYSecrets</h1>",
+    st.write("<h1 style='position:absolute; top:60%; left:30%; transform:translate(-50%, -25%);'>HYSecrets</h1>",
              unsafe_allow_html=True)
-    # st.title("Welcome")
-
+    with open("Backround/home page.jpg", "rb") as image_file:
+        encoded_string = base64.b64encode(image_file.read())
     st.markdown(
-        """
+        f"""
         <style>
-        .image {
-            position: absolute;
-            top: 50%;
-            left: 60%;
-            transform: translate(-50%, -50%);
-        }
+        .stApp {{
+            background-image: url(data:image/{"png"};base64,{encoded_string.decode()});
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }}
         </style>
         """,
-        unsafe_allow_html=True,
+        unsafe_allow_html=True
     )
-    st.image("Backround/home page.jpg", width=350)
+    # add_bg_from_local('Backround/home page.jpg')
+    # st.title("Welcome")
 
-
-
+    # image_path = "Backround/home page.jpg"
+    # st.markdown(
+    #     """
+    #     <style>
+    #     .image {
+    #         position: absolute;
+    #         top: 0%;
+    #         left: 0%;
+    #         transform: translate(-50%, -50%);
+    #     }
+    #     </style>
+    #     """,
+    #     unsafe_allow_html=True,
+    # )
+    # st.image(image_path, width=200)
+    # image = Image.open("Backround/home page.jpg")
+    # st.image(image, caption="Your Image", use_column_width=None, width=350)
+    # background_image = "Backround/home page.jpg"
+    # st.markdown(
+    #     f"""
+    #     <style>
+    #     body {{
+    #         background-image: url("{background_image}");
+    #         background-size: cover;
+    #     }}
+    #     </style>
+    #     """,
+    #     unsafe_allow_html=True,
+    # )
+def add_bg_from_local(image_file):
+    st.write("<h1 style='position:absolute; top:90%; left:30%; transform:translate(-50%, -50%);'>Welcome""</h1>",
+             unsafe_allow_html=True)
+    st.write("<h1 style='position:absolute; top:60%; left:30%; transform:translate(-50%, -25%);'>HYSecrets</h1>",
+             unsafe_allow_html=True)
+    with open(image_file, "rb") as image_file:
+        encoded_string = base64.b64encode(image_file.read())
+    st.markdown(
+        f"""
+        <style>
+        .stApp {{
+            background-image: url(data:image/{"png"};base64,{encoded_string.decode()});
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }}
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
 def Encryption():
     st.write("Please select an image to encrypt")
     st.session_state.text = ""
     st.session_state.text = st.text_input('Enter your message', max_chars=None ,value=st.session_state.text, key="1")
-
     uploaded_file = st.file_uploader("Upload a photo", type=["png"], key="uploader1")
     image_path=""
+    st.session_state['image_en']=0
     if uploaded_file is not None:
+        st.session_state['image_en'] = 1
         with open(uploaded_file.name, "wb") as f:
             f.write(uploaded_file.getbuffer())
 
@@ -125,12 +176,24 @@ def Encryption():
                 st.warning("No processed image found. Please click on 'Send' to process the image first.")
 
         os.remove(st.session_state['path'])
+    if st.session_state['image_en']==0:
+        col1, col2, col3 = st.columns([1, 6, 1])
 
+        with col1:
+            st.write("")
+
+        with col2:
+            st.image("Backround/encryption.jpg",width=410)
+
+        with col3:
+            st.write("")
 
 def Decryption():
+    st.session_state['image_de'] = 0
     st.write("Please select an image to decode")
     uploaded_file = st.file_uploader("Upload a photo", type=["png"],  key="uploader2")
     if uploaded_file is not None:
+        st.session_state['image_de'] = 1
         with open(uploaded_file.name, "wb") as f:
             f.write(uploaded_file.getbuffer())
 
@@ -152,6 +215,17 @@ def Decryption():
                 st.write(my_dec[1])
 
         os.remove(image_path)
+    if st.session_state['image_de'] == 0:
+        col1, col2, col3 = st.columns([1, 6, 1])
+
+        with col1:
+            st.write("")
+
+        with col2:
+            st.image("Backround/decryption.jpg", width=495)
+
+        with col3:
+            st.write("")
         # ------------------------------------------------------------------------------
 
 def About():
@@ -212,13 +286,7 @@ def SEdata():
     else:
         arr = np.random.normal(1, 1, size=100)
         fig, ax = plt.subplots()
-        # ax.hist(arr, bins=20)
         st.pyplot(fig)
-    # arr = np.random.normal(1, 1, size=100)
-    # fig, ax = plt.subplots()
-    # ax.hist(arr, bins=20)
-    #
-    # st.pyplot(fig)
 
 
 def Sidebar():
@@ -242,69 +310,3 @@ def Sidebar():
 
 
 Sidebar()
-# --------------------------------------------------------------------------#
-
-# # Create download button
-# if st.button('Download Processed Image'):
-#     buffered = BytesIO()
-#     processed_img.save(buffered, format="PNG")
-#     val = buffered.getvalue()
-#     st.download_button(
-#         label="Download",
-#         data=val,
-#         file_name='processed_img.png',
-#         mime='image/PNG'
-#     )
-
-# --------------------------------------------------------------------------#
-
-
-#------------------לבדוק את האופציה הזאת-----------
-# Read data from an Excel file
-# data = pd.read_excel('example.xlsx')
-#
-# Select the columns you want to plot
-# x = data['x']
-# y = data['y']
-#
-# # Create a new figure and axis object using matplotlib's subplots() function
-# fig, ax = plt.subplots()
-#
-# # Create a line plot of the selected data using matplotlib's plot() function
-# ax.plot(x, y)
-#
-# # Set the x and y axis labels using matplotlib's set_xlabel() and set_ylabel() functions
-# ax.set_xlabel('X Axis Label')
-# ax.set_ylabel('Y Axis Label')
-#
-# # Display the plot using Streamlit's st.pyplot() function
-# st.pyplot(fig)
- #-----------------------------לבדוק גם את זאת זאת הטובה יותר ---------
-# # Read data from an Excel file
-# data = pd.read_excel('example.xlsx')
-#
-# # Select the columns you want to plot
-# x = data['x']
-# y = data['y']
-#
-# # Create a new figure and axis object using matplotlib's subplots() function
-# fig, ax = plt.subplots()
-#
-# # Create a line plot of the selected data using matplotlib's plot() function
-# ax.plot(x, y)
-#
-# # Set the x and y axis labels using matplotlib's set_xlabel() and set_ylabel() functions
-# ax.set_xlabel('X Axis Label')
-# ax.set_ylabel('Y Axis Label')
-#
-# # Set the x and y axis tick values using matplotlib's set_xticks() and set_yticks() functions
-# ax.set_xticks([i/10 for i in range(11)])
-# ax.set_yticks([i/10 for i in range(11)])
-#
-# # Display the plot using Streamlit's st.pyplot() function
-# st.pyplot(fig)
-
-# arr = np.random.normal(1, 1, size=100)
-# fig, ax = plt.subplots()
-# ax.hist(arr, bins=20)
-# st.pyplot(fig)
