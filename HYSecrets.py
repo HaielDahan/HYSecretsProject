@@ -19,11 +19,11 @@ import base64
 
 import file_reader as fr
 def Home():
-    st.write("<h1 style='position:absolute; top:90%; left:30%; transform:translate(-50%, -50%);'>Welcome""</h1>",
-             unsafe_allow_html=True)
-    st.write("<h1 style='position:absolute; top:60%; left:30%; transform:translate(-50%, -25%);'>HYSecrets</h1>",
-             unsafe_allow_html=True)
-    with open("Backround/home page.jpg", "rb") as image_file:
+    # st.write("<h1 style='position:absolute; top:90%; left:30%; transform:translate(-50%, -50%);'>Welcome""</h1>",
+    #          unsafe_allow_html=True)
+    # st.write("<h1 style='position:absolute; top:60%; left:30%; transform:translate(-50%, -25%);'>HYSecrets</h1>",
+    #          unsafe_allow_html=True)
+    with open("Backround/home_page.png", "rb") as image_file:
         encoded_string = base64.b64encode(image_file.read())
     st.markdown(
         f"""
@@ -38,9 +38,6 @@ def Home():
         """,
         unsafe_allow_html=True
     )
-    # add_bg_from_local('Backround/home page.jpg')
-    # st.title("Welcome")
-
     # image_path = "Backround/home page.jpg"
     # st.markdown(
     #     """
@@ -57,41 +54,12 @@ def Home():
     # )
     # st.image(image_path, width=200)
     # image = Image.open("Backround/home page.jpg")
-    # st.image(image, caption="Your Image", use_column_width=None, width=350)
-    # background_image = "Backround/home page.jpg"
-    # st.markdown(
-    #     f"""
-    #     <style>
-    #     body {{
-    #         background-image: url("{background_image}");
-    #         background-size: cover;
-    #     }}
-    #     </style>
-    #     """,
-    #     unsafe_allow_html=True,
-    # )
-def add_bg_from_local(image_file):
-    st.write("<h1 style='position:absolute; top:90%; left:30%; transform:translate(-50%, -50%);'>Welcome""</h1>",
-             unsafe_allow_html=True)
-    st.write("<h1 style='position:absolute; top:60%; left:30%; transform:translate(-50%, -25%);'>HYSecrets</h1>",
-             unsafe_allow_html=True)
-    with open(image_file, "rb") as image_file:
-        encoded_string = base64.b64encode(image_file.read())
-    st.markdown(
-        f"""
-        <style>
-        .stApp {{
-            background-image: url(data:image/{"png"};base64,{encoded_string.decode()});
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-        }}
-        </style>
-        """,
-        unsafe_allow_html=True
-    )
 def Encryption():
-    st.write("Please select an image to encrypt")
+    title_html = '''
+        <h1 style="font-size: 32px;">🔒 Please select an image to encrypt</h1>
+    '''
+
+    st.markdown(title_html, unsafe_allow_html=True)
     st.session_state.text = ""
     st.session_state.text = st.text_input('Enter your message', max_chars=None ,value=st.session_state.text, key="1")
     uploaded_file = st.file_uploader("Upload a photo", type=["png"], key="uploader1")
@@ -101,9 +69,9 @@ def Encryption():
         st.session_state['image_en'] = 1
         with open(uploaded_file.name, "wb") as f:
             f.write(uploaded_file.getbuffer())
-
             # Get the path of the file you uploaded
             image_path = os.path.abspath(uploaded_file.name)
+
             st.session_state['path'] = image_path
         # Process image
         # processed_img =Image.open(uploaded_file)
@@ -116,7 +84,6 @@ def Encryption():
 
             # starting encryption
             im = Image.open(image_path)
-
             try:
                 # add original image to testFolder
                 new_string = image_path.rsplit("\\", 1)[0]
@@ -154,9 +121,7 @@ def Encryption():
             # Display processed image
             st.image(processed_img, caption='Processed Image', use_column_width=True)
 
-        st.session_state.text = ""
-
-        if st.button('Download Processed Image'):
+            st.session_state.text = ""
             processed_img = st.session_state['pic']
 
             if processed_img is not None:
@@ -166,7 +131,7 @@ def Encryption():
                 processed_img.save(buffered, format="PNG", pnginfo=metadata)
                 val = buffered.getvalue()
                 st.download_button(
-                    label="Download",
+                    label="Download processed Image",
                     data=val,
                     file_name='processed_image.png',
                     mime='image/PNG'
@@ -183,14 +148,17 @@ def Encryption():
             st.write("")
 
         with col2:
-            st.image("Backround/encryption.jpg",width=410)
+            st.image("Backround/encryption.jpg",width=370)
 
         with col3:
             st.write("")
 
 def Decryption():
     st.session_state['image_de'] = 0
-    st.write("Please select an image to decode")
+    title_html = '''
+        <h1 style="font-size: 32px;">🔓 Please select an image to decryption</h1>
+    '''
+    st.markdown(title_html, unsafe_allow_html=True)
     uploaded_file = st.file_uploader("Upload a photo", type=["png"],  key="uploader2")
     if uploaded_file is not None:
         st.session_state['image_de'] = 1
@@ -248,6 +216,11 @@ def About():
 
 
 def SEdata():
+    title_html = '''
+            <h1 style="font-size: 32px;">📊 StagExpose Data Analysis</h1>
+        '''
+
+    st.markdown(title_html, unsafe_allow_html=True)
     if st.button('Run StegExpose'):
         sepython.py_stegExpose()
         df = pd.read_csv("check.csv")
@@ -284,7 +257,7 @@ def SEdata():
 
 
     else:
-        arr = np.random.normal(1, 1, size=100)
+        np.random.normal(0, 1, size=100)
         fig, ax = plt.subplots()
         st.pyplot(fig)
 
@@ -310,3 +283,26 @@ def Sidebar():
 
 
 Sidebar()
+
+
+#######################################################
+# def add_bg_from_local(image_file):
+#     st.write("<h1 style='position:absolute; top:90%; left:30%; transform:translate(-50%, -50%);'>Welcome""</h1>",
+#              unsafe_allow_html=True)
+#     st.write("<h1 style='position:absolute; top:60%; left:30%; transform:translate(-50%, -25%);'>HYSecrets</h1>",
+#              unsafe_allow_html=True)
+#     with open(image_file, "rb") as image_file:
+#         encoded_string = base64.b64encode(image_file.read())
+#     st.markdown(
+#         f"""
+#         <style>
+#         .stApp {{
+#             background-image: url(data:image/{"png"};base64,{encoded_string.decode()});
+#             background-size: contain;
+#             background-repeat: no-repeat;
+#             background-position: center;
+#         }}
+#         </style>
+#         """,
+#         unsafe_allow_html=True
+#     )
