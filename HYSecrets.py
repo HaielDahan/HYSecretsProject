@@ -227,7 +227,7 @@ def SEdata():
 
         # create animated bar chart
         chart = alt.Chart(df).mark_bar().encode(
-            x=alt.X('File name', title='File name'),
+            x=alt.X('File name', title='File name',axis=alt.Axis(labelAngle=0)),
             y=alt.Y('Fusion (mean)', title='Fusion (mean)'),
             color=alt.Color('File name', legend=None),
             tooltip=['File name', 'Fusion (mean)']
